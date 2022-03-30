@@ -1,0 +1,6 @@
+Roxana,9.77
+Rodrigo,9.20
+Victoria,9.47
+Lila,9.73
+Elisa,9.77
+Jose,8.87

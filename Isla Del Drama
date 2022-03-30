@@ -1,0 +1,66 @@
+#''Está por terminar la primera temporada del Reality Show llamado “La Isla del
+#Drama”; razón por la cual se debe iniciar el proceso de selección de los nuevos
+#participantes para la segunda temporada.
+#La selección es realizada por tres jueces que emiten una puntuación entre 0.0
+#y 10.0, por cada candidato que realice la audición.
+#El problema es que son tantos los candidatos para la audición que la empresa
+#productora desea que usted realice un programa que procese una lista de
+#candidatos evaluados que contiene la siguiente información:
+#NOMBRE DEL CANDIDATO Y LAS 3 #PUNTUACIONES DE LOS JUECES.
+#Dicha información se encuentra almacenada en un archivo de nombre PUNTUACIONES.TXT. Procese la información
+#y determine e imprima por pantalla.
+#✓ Porcentaje de candidatos que fueron seleccionados como participantes del reality show.
+#✓ Promedio de la puntuación definitiva obtenida por los candidatos que pasaron a ser participantes.
+#✓ Un mensaje que indique si es necesario o no una segunda etapa de selección.
+#Consideraciones:
+#✓ La puntuación definitiva de un candidato es el promedio de las 3 puntuaciones emitidas por los jueces.
+#✓ Un candidato es seleccionado como participante si la puntuación definitiva es mayor o igual a 7.5 puntos.
+#✓ Se necesita una segunda etapa de selección, si la cantidad de candidatos seleccionados es menor a 20 o
+#es mayor a 24.'''
+#Inicializacion de variables
+Acum=0
+c=0
+c1=0
+linea=1 
+#Apertura de Archivos
+arch1=open('Puntuaciones.txt','r')
+arch2=open('seleccionados.txt','w')
+arch3=open('noseleccionados.txt','w')
+contenido=arch1.readlines()
+n=int(contenido[0])
+for i in range(n):
+	lista=contenido[linea].split(',')
+	linea+=1
+	NomC=str(lista[0])
+	print(NomC)
+	P1=float(lista[1])
+	print(P1)
+	P2=float(lista[2])
+	print(P2)
+	P3=float(lista[3])
+	print(P3)
+	PuntD=(P1+P2+P3)/3
+	c=c+1
+	if PuntD >=7.5:
+		c1=c1+1
+		Acum=Acum+PuntD
+		arch2.write(str(NomC)+','+"{0:.2f}".format(PuntD)+'\n')
+	else:
+		arch3.write(str(NomC)+','+"{0:.2f}".format(PuntD)+'\n')
+arch1.close()
+arch2.close()
+arch3.close()
+Porc=(c1/c)*100
+if c>0:
+	print('el porcentaje de participantes que fueron selecionados es de: ',"{0:.2f}".format(Porc),'%')
+else:
+	print('no hubieron participantes')
+Prom=Acum/c1
+if c1>0:
+	print('el promedio de las puntuaciones obtenidas por los participantes seleccionados es de: ',"{0:.2f}".format(Prom))
+else:
+	print('Nadie fue seleccionado')
+if (c1<20) or (c1>24):
+	print('Se necesita otra etapa para la seleccion')
+else:
+	print('No se necesita otra etapa de seleccion')
